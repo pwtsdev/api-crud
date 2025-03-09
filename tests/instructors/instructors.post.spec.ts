@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable playwright/expect-expect */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { expect, test } from '@fixtures/api.fixture';
 import { VALID_EMAIL, VALID_ID } from '@helpers/validators';
