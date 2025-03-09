@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import test, { expect } from '@playwright/test';
 
 // APIResponse
@@ -45,4 +47,18 @@ test('APIResponse details', async ({ request }) => {
   // url
   console.log('👉 response url');
   console.log(response.url());
+
+  // destrukturyzacja danych
+  console.log('👉 destrukturyzacja do obiektu');
+  const responseData = await response.json();
+  const instructorData = {
+    instructorId: responseData.id,
+    instructorEmail: responseData.email,
+  };
+  console.log(instructorData);
+
+  console.log('👉 destrukturyzacja skrócone przypisanie obiektu');
+  const { id: instructorId, email: instructorEmail } = await response.json();
+  const instructorData2 = { instructorId, instructorEmail };
+  console.log(instructorData2);
 });
