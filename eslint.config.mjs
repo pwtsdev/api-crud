@@ -14,7 +14,7 @@ export default [
   {
     files: ['tests/**'],
     rules: {
-      'playwright/max-expects': ['error', { max: 5 }],
+      /* 'playwright/max-expects': ['error', { max: 5 }], */
     },
   },
   {
