@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -37,5 +38,30 @@ test.describe('GET /instructors', () => {
     // bio
     expect(responseBody).toHaveProperty('bio');
     expect(responseBody.bio).toBe('Experienced JavaScript & Frontend expert and online instructor.');
+  });
+
+  test('should return 404 when instructor ID does not exist', async ({ request }) => {
+    const instructorId = 'xxxx';
+    const response = await request.get(`/instructors/${instructorId}`);
+
+    expect(response.status()).toBe(404);
+  });
+
+  test('should return limited number of instructors when _limit is set', async ({ request }) => {
+    const response = await request.get('/instructors', {
+      params: {
+        _limit: '3',
+      },
+    });
+
+    expect(response.status()).toBe(200);
+
+    const responseBody = await response.json();
+    expect(responseBody.length).toBe(3);
+
+    for (const instructor of responseBody) {
+      expect(instructor).toHaveProperty('name');
+      expect(instructor.name.trim().length).toBeGreaterThanOrEqual(3);
+    }
   });
 });
