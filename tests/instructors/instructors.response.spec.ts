@@ -8,17 +8,17 @@ test('APIResponse details', async ({ request }) => {
   const response = await request.get('http://localhost:3000/instructors/vflr');
   expect(response.status()).toBe(200);
 
-  // body
+  // response body
   console.log('👉 response body');
   console.log(await response.body());
   // console.log((await response.body()).toString());
   // console.log(JSON.parse((await response.body()).toString()));
 
-  // text
+  // response as text
   console.log('👉 response body text');
   console.log(await response.text());
 
-  // json
+  // response as json
   console.log('👉 response body json');
   console.log(await response.json());
 
