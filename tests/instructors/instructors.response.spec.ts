@@ -1,64 +1,66 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import test, { expect } from '@playwright/test';
+
+import { expect, test } from '@fixtures/api.fixture';
 
 // APIResponse
 // APIResponse class represents responses returned by apiRequestContext.get() and similar methods.
 // https://playwright.dev/docs/api/class-apiresponse#api-response-headers
 
-test('APIResponse details', async ({ request }) => {
-  const response = await request.get('http://localhost:3000/instructors/vflr');
+test('APIResponse details', async ({ request, log }) => {
+  const response = await request.get('/instructors/vflr');
   expect(response.status()).toBe(200);
 
   // response body
-  console.log('👉 response body');
-  console.log(await response.body());
+  log.info('👉 response body');
+  log.info(await response.body());
   // console.log((await response.body()).toString());
   // console.log(JSON.parse((await response.body()).toString()));
 
   // response as text
-  console.log('👉 response body text');
-  console.log(await response.text());
+  log.info('👉 response body text');
+  log.info(await response.text());
 
   // response as json
-  console.log('👉 response body json');
-  console.log(await response.json());
+  log.info('👉 response body json');
+  log.info(await response.json());
 
   // status
-  console.log('👉 response status');
-  console.log(response.status());
+  log.info('👉 response status');
+  log.info(response.status());
 
   // status text
-  console.log('👉 response status text');
-  console.log(response.statusText());
+  log.info('👉 response status text');
+  log.info(response.statusText());
 
   // ok - status in the range 200-299
-  console.log('👉 response ok');
-  console.log(response.ok());
+  log.info('👉 response ok');
+  log.info(response.ok());
 
   // headers
-  console.log('👉 response headers');
-  console.log(response.headers());
+  log.info('👉 response headers');
+  log.info(response.headers());
 
   // headersArray
-  console.log('👉 response headersArray');
-  console.log(response.headersArray());
+  log.info('👉 response headersArray');
+  log.info(response.headersArray());
 
   // url
-  console.log('👉 response url');
-  console.log(response.url());
+  log.info('👉 response url');
+  log.info(response.url());
 
   // destrukturyzacja danych
-  console.log('👉 destrukturyzacja do obiektu');
+  log.info('👉 destrukturyzacja do obiektu');
   const responseData = await response.json();
   const instructorData = {
     instructorId: responseData.id,
     instructorEmail: responseData.email,
   };
-  console.log(instructorData);
+  log.info(instructorData);
 
-  console.log('👉 destrukturyzacja skrócone przypisanie obiektu');
+  log.info('👉 destrukturyzacja skrócone przypisanie obiektu');
   const { id: instructorId, email: instructorEmail } = await response.json();
   const instructorData2 = { instructorId, instructorEmail };
-  console.log(instructorData2);
+  log.info(instructorData2);
 });
