@@ -1,12 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  // Arrange
-  const url = 'https://pwts.dev/';
-
-  // Act
-  await page.goto(url);
-
-  // Assert
-  await expect(page).toHaveTitle(/pwts/);
+test('should return status code 201 ok', async ({ request }) => {
+  const response = await request.get('https://jsonplaceholder.typicode.com/users');
+  expect(response.status()).toBe(200);
 });
