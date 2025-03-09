@@ -11,7 +11,8 @@
     "outDir": "../tests-out",
     "baseUrl": "./",
     "paths": {
-      "@fixtures/*": ["src/api/fixtures/*"]
+      "@fixtures/*": ["src/api/fixtures/*"],
+      "@helpers/*": ["src/api/helpers/*"]
     }
   }
 }

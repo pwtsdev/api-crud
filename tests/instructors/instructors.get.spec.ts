@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { expect, test } from '@fixtures/api.fixture';
-import { VALID_ID } from 'src/api/helpers/validators';
+import { NOT_EMPTY_STRING, VALID_EMAIL, VALID_ID } from '@helpers/validators';
 
 test.describe('GET /instructors', () => {
   test('should return all instructors', async ({ request }) => {
@@ -24,21 +24,20 @@ test.describe('GET /instructors', () => {
     const responseBody = await response.json();
 
     // name
-    expect(responseBody).toHaveProperty('name');
-    expect(responseBody.name).toBe('Ethan Harris');
-    expect(responseBody.name.trim().length).toBeGreaterThanOrEqual(3);
+    expect(responseBody).toHaveProperty('name', 'Ethan Harris');
+    expect(responseBody.name).toMatch(NOT_EMPTY_STRING);
 
     // email
-    expect(responseBody).toHaveProperty('email');
-    expect(responseBody.email).toBe('ethan.harris@example.com');
+    expect(responseBody).toHaveProperty('email', 'ethan.harris@example.com');
+    expect(responseBody.email).toMatch(VALID_EMAIL);
 
     // specialization
-    expect(responseBody).toHaveProperty('specialization');
-    expect(responseBody.specialization).toBe('JavaScript & Frontend');
+    expect(responseBody).toHaveProperty('specialization', 'JavaScript & Frontend');
+    expect(responseBody.name).toMatch(NOT_EMPTY_STRING);
 
     // bio
-    expect(responseBody).toHaveProperty('bio');
-    expect(responseBody.bio).toBe('Experienced JavaScript & Frontend expert and online instructor.');
+    expect(responseBody).toHaveProperty('bio', 'Experienced JavaScript & Frontend expert and online instructor.');
+    expect(responseBody.name).toMatch(NOT_EMPTY_STRING);
   });
 
   test('should return 404 when instructor ID does not exist', async ({ request }) => {
@@ -62,7 +61,7 @@ test.describe('GET /instructors', () => {
 
     for (const instructor of responseBody) {
       expect(instructor).toHaveProperty('name');
-      expect(instructor.name.trim().length).toBeGreaterThanOrEqual(3);
+      expect(instructor.name).toMatch(NOT_EMPTY_STRING);
     }
   });
 
