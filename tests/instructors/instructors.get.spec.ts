@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { expect, test } from '@fixtures/api.fixture';
+import { VALID_ID } from 'src/api/helpers/validators';
 
 test.describe('GET /instructors', () => {
   test('should return all instructors', async ({ request }) => {
@@ -63,5 +64,17 @@ test.describe('GET /instructors', () => {
       expect(instructor).toHaveProperty('name');
       expect(instructor.name.trim().length).toBeGreaterThanOrEqual(3);
     }
+  });
+
+  test('should return valid ID format for all instructors', async ({ request }) => {
+    const response = await request.get('/instructors');
+
+    expect(response.status()).toBe(200);
+
+    const responseBody = await response.json();
+    const ids = responseBody.map((instructor: { id: string }) => instructor.id);
+    ids.forEach((id: string) => {
+      expect(id).toMatch(VALID_ID);
+    });
   });
 });
