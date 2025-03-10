@@ -11,7 +11,7 @@ export function getRandomInstructorData(): InstructorData {
   return {
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    specialization: faker.lorem.word(3),
-    bio: faker.lorem.sentence(2),
+    specialization: faker.lorem.words(3),
+    bio: faker.lorem.sentences(2),
   };
 }
