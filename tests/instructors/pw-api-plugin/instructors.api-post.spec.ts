@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { getRandomInstructorData } from '@datafactory/instructor.data';
 import { expect, test } from '@playwright/test';
 import { apiPost } from 'pw-api-plugin';
