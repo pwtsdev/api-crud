@@ -2,26 +2,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { expect, test } from '@fixtures/api.fixture';
 import { NOT_EMPTY_STRING, VALID_ID } from '@helpers/validators';
+import { readAllCoursesRequest, readCourseByIdRequest } from '@requests/courses/course.requests';
 
 test.describe('GET /courses', () => {
-  test('should return all courses', async ({ request }) => {
-    const response = await request.get('/courses');
-
-    expect(response.status()).toBe(200);
+  test('should return all courses', async ({}) => {
+    const response = await readAllCoursesRequest();
 
     const responseBody = await response.json();
     expect(responseBody.length).toBeGreaterThanOrEqual(1);
   });
 
-  test('should return course details when a valid ID is provided', async ({ request }) => {
+  test('should return course details when a valid ID is provided', async ({ log }) => {
     const courseId = 'txxg';
-    const response = await request.get(`/courses/${courseId}`);
-
-    expect(response.status()).toBe(200);
+    const response = await readCourseByIdRequest(courseId);
 
     const responseBody = await response.json();
+    log.info(responseBody);
 
-    // id
+    // // id
     expect(responseBody).toHaveProperty('id');
     expect(responseBody.id).toMatch(VALID_ID);
 
