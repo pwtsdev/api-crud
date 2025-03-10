@@ -12,7 +12,9 @@
     "baseUrl": "./",
     "paths": {
       "@fixtures/*": ["src/api/fixtures/*"],
-      "@helpers/*": ["src/api/helpers/*"]
+      "@helpers/*": ["src/api/helpers/*"],
+      "@datafactory/*": ["src/api/datafactory/*"],
+      "@requests/*": ["src/api/requests/*"]
     }
   }
 }
